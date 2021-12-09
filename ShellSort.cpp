@@ -62,7 +62,28 @@ void ShellSort(int A[], int n) {
     }
 }
 
+// @ 等当前子表排完再排其他表
+void ShellSortSub(int A[], int n) {
+    int i, j, k, d, temp;
+    for (d = n / 2; d >= 1; d /= 2) {
+        for (j = 0; j < d; j++) {  // step 排几个表
+            for (i = j; i < n; i += d) {
+                if (A[i - d] > A[i]) {
+                    temp = A[i];
+                    for (k = i - d; k >= 0 && A[k] > temp; k -= d) {
+                        A[k + d] = A[k];
+                    }
+                    A[k + d] = temp;
+                }
+            }
+        }
+    }
+}
+
 int main() {
     // ^ 方法一
     Sort(ShellSort, SIZE, 0);
+
+    // ^ 排完当前子表再排其他子表
+    Sort(ShellSortSub, SIZE, 0);
 }
