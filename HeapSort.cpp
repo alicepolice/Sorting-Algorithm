@@ -56,7 +56,7 @@ void Swap(int &a, int &b) {
 
 void HeadAdjust(int A[], int head, int len) {
     for (int i = head * 2; i <= len; i *= 2) {
-        if (i + 1 <= len && A[i + 1] > A[i]) i = i + 1;
+        if (i < len && A[i + 1] > A[i]) i = i + 1;  // ^ i+1 <= len
         if (A[i] > A[head]) {
             Swap(A[i], A[head]);
             head = i;
