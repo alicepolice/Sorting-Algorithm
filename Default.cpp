@@ -45,6 +45,12 @@ void Sort(void (*p)(int A[], int n), int size, int start) {
     printf("-----------------------------------------------\n");
 }
 
+void Swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
 /* --------------------------------------------------------------------------*/
 
 int main() {
