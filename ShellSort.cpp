@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #define MAXSIZE 500
-#define SIZE 10
+#define SIZE 200
 #define null 0
 #define bu printf("bug\n");
 
@@ -23,7 +23,7 @@ int *MakeArray(int n, int start) {
 }
 
 bool TestOrder(int A[], int n, int start) {
-    if (n <= 20) {
+    if (n <= 200) {
         ShowArray(A, n, start);
     }
 
@@ -39,9 +39,13 @@ bool TestOrder(int A[], int n, int start) {
 
 void Sort(void (*p)(int A[], int n), int size, int start) {
     int *A = MakeArray(size, start);
+    clock_t begin, end;
     TestOrder(A, size, start);
+    begin = clock();
     (*p)(A, size);
+    end = clock();
     TestOrder(A, size, start);
+    printf("CPU 占用的总时间：%f 秒\n", (double)(end - start) / CLOCKS_PER_SEC);
     printf("-----------------------------------------------\n");
 }
 

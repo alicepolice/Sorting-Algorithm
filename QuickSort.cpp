@@ -39,9 +39,13 @@ bool TestOrder(int A[], int n, int start) {
 
 void Sort(void (*p)(int A[], int low, int high), int size, int start) {
     int *A = MakeArray(size, start);
+    clock_t begin, end;
     TestOrder(A, size, start);
+    begin = clock();
     (*p)(A, 0, size - 1);  // step 下标 0~n-1
+    end = clock();
     TestOrder(A, size, start);
+    printf("CPU 占用的总时间：%f 秒\n", (double)(end - start) / CLOCKS_PER_SEC);
     printf("-----------------------------------------------\n");
 }
 
@@ -50,7 +54,7 @@ void Sort(void (*p)(int A[], int low, int high), int size, int start) {
 int Partition(int A[], int low, int high) {
     int pivot = A[low];
     while (high > low) {
-        while (high > low && A[high] > pivot) high--;
+        while (high > low && A[high] >= pivot) high--;
         A[low] = A[high];
         while (high > low && A[low] < pivot) low++;
         A[high] = A[low];

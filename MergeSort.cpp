@@ -19,6 +19,9 @@ int *MakeArray(int n, int start) {
     for (int i = 0 + start; i < n; i++) {
         a[i] = rand() % 100;
     }
+    // a[0] = 3;
+    // a[1] = -2;
+    // a[2] = -1;
     return a;
 }
 
@@ -39,9 +42,13 @@ bool TestOrder(int A[], int n, int start) {
 
 void Sort(void (*p)(int A[], int low, int high), int size, int start) {
     int *A = MakeArray(size, start);
+    clock_t begin, end;
     TestOrder(A, size, start);
+    begin = clock();
     (*p)(A, 0, size - 1);  // FAIL 数组个数与下标数不同,要减1
+    end = clock();
     TestOrder(A, size, start);
+    printf("CPU 占用的总时间：%f 秒\n", (double)(end - start) / CLOCKS_PER_SEC);
     printf("-----------------------------------------------\n");
 }
 
